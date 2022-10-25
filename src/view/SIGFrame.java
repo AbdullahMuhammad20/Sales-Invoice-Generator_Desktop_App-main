@@ -9,6 +9,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import model.InvoiceHeader;
+import model.InvoiceIteams;
 import controller.SIGController;
 import javax.swing.table.TableModel;
 import model.HeaderTableModel;
@@ -16,7 +17,7 @@ import model.ItemsTableModel;
 
 /**
  *
- * @author test
+ * @author Abdullah Younis
  */
 public class SIGFrame extends javax.swing.JFrame {
 
@@ -57,8 +58,10 @@ public class SIGFrame extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         menuISave = new javax.swing.JMenuItem();
+        menuISave.addActionListener(listener);
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         mILoad = new javax.swing.JMenuItem();
+        mILoad.addActionListener(listener);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -200,11 +203,11 @@ public class SIGFrame extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(291, 291, 291)
-                                .addComponent(jLabel1))
-                            .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(291, 291, 291)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 18, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -300,33 +303,48 @@ public class SIGFrame extends javax.swing.JFrame {
     private javax.swing.JTable tblLines;
     // End of variables declaration//GEN-END:variables
 
-    private ArrayList<InvoiceHeader> AllInvoices;
+    
     // Owen code not generated
     public static DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
     private SIGController listener = new SIGController(this);
-    private HeaderTableModel hTblModels;
-    private ItemsTableModel  iTblModels;
+    private HeaderTableModel hTblModels; // for header
+    private ItemsTableModel  iTblModels; // for invoice
+    private ArrayList<InvoiceHeader> AllInvoices;
+    private ArrayList<InvoiceIteams> AllInvoicesItems;
     
     public ArrayList<InvoiceHeader> getInvoiceDetails()
     {
         if(AllInvoices == null)
             AllInvoices = new ArrayList<>();
         return AllInvoices;
-            
-        
     }
     
-    public ItemsTableModel getItemTbMod()
+     public ArrayList<InvoiceIteams> getIteamDetails()
+    {
+        if(AllInvoicesItems == null)
+            AllInvoicesItems = new ArrayList<>();
+        return AllInvoicesItems;
+    }
+     
+    
+     public void setInvoiceDetails(ArrayList<InvoiceHeader> invoices) 
+     {
+        this.AllInvoices = invoices;
+     }
+    
+    public ItemsTableModel getInviceItemTbMod()
     {
         return iTblModels;
     }
     
-    public void setItemTbMod(ItemsTableModel iTblModels)
+    public void setInviceItemTbMod(ItemsTableModel iTblModels)
     {
         this.iTblModels = iTblModels;
         tblLines.setModel(iTblModels);
     }
     
+    
+  
     public InvoiceHeader getInvByNumber(int iNumber)
     {
         InvoiceHeader invoice = null;
@@ -351,13 +369,24 @@ public class SIGFrame extends javax.swing.JFrame {
         return null;
      }
      
+     public SIGController getController()
+     {
+         return listener;
+     }
      
      
-     // Creat setter to use it from Controller
+     // Create setter to use it from Controller
      public void setHTblModel(HeaderTableModel headerTableModel) 
      {
         this.hTblModels = headerTableModel;
         this.tblInv.setModel(headerTableModel);
+     }
+     
+      
+     public void setLTblModel(ItemsTableModel itemsTableModel) 
+     {
+        this.iTblModels = itemsTableModel;
+        this.tblLines.setModel(itemsTableModel);
      }
 
 }

@@ -22,15 +22,20 @@ import model.InvoiceHeader;
 import view.SIGFrame;
 import model.HeaderTableModel;
 import model.InvoiceIteams;
+import model.ItemsTableModel;
 /**
  *
  * @author Abdullah Younis 
  * @date   17/10/2022
+ * @update 25/10/2022
  */
 public class SIGController implements ActionListener
 {
     // Deculare a global varibale from GUI Form
        private SIGFrame guiFrame;
+       
+       
+       // Create constractor
        public SIGController(SIGFrame guiframe) 
        {
         this.guiFrame = guiframe;
@@ -62,9 +67,6 @@ public class SIGController implements ActionListener
                 case "Save":
                     save();
                      break;
-                 
-                 
-                    
             }
         
         }
@@ -82,7 +84,7 @@ public class SIGController implements ActionListener
     
     private void newLine()
     {
-    
+     
     }
     
     private void deleteLine()
@@ -103,10 +105,12 @@ public class SIGController implements ActionListener
             JOptionPane.showMessageDialog(guiFrame, "Please Choose Header File","Header",JOptionPane.WARNING_MESSAGE);
             
             int result = fileChooser.showOpenDialog(guiFrame);
+            
             if (result == JFileChooser.APPROVE_OPTION) 
             {
                 
                 hFile = fileChooser.getSelectedFile();
+                
                 JOptionPane.showMessageDialog(guiFrame, "Choose Line File!","Line",JOptionPane.WARNING_MESSAGE);
                 result = fileChooser.showOpenDialog(guiFrame);
                 
@@ -115,12 +119,13 @@ public class SIGController implements ActionListener
                     lFile = fileChooser.getSelectedFile();
                 }
             }
+            }
             else 
             {
                 hFile = new File(hPath);
                 lFile = new File (lPath);
             }
-        }
+        
         
         if (hFile != null && lFile != null) 
         {
@@ -128,9 +133,9 @@ public class SIGController implements ActionListener
             {
                 // Get values from the header file after attache it from the user
                 List<String> hlines = readFile(hFile);
-                // Get values from the line file after attache it from the user
-                List<String> llines = readFile(lFile);
                 
+                 System.out.println(hFile.toString());
+                 System.out.println(lFile.toString());
                 for (String hL : hlines) 
                 {
                     String[] part = hL.split (",");
@@ -153,6 +158,11 @@ public class SIGController implements ActionListener
                 }
                 guiFrame.setHTblModel(new HeaderTableModel(guiFrame.getInvoiceDetails()));
                 
+                //Check the invoice is get successfully
+                System.out.println(guiFrame.getInvoiceDetails().toString());
+                 // Get values from the line file after attache it from the user
+                List<String> llines = readFile(lFile);
+                System.out.println("All Lines Reader :=>>> "+llines);
                 for (String line : llines)
                 {
                     // Declauer a new array to set lines value
@@ -161,9 +171,14 @@ public class SIGController implements ActionListener
                     String cName = p[1];
                     int    inPrice = Integer.parseInt(p[2]);
                     int    inCount = Integer.parseInt(p[3]);
+                    System.out.println("Invoice Number IS :=>>> "+invoiceNumber);
+                    System.out.println("Invoice Name IS :=>>> "+cName.toString());
+                    System.out.println("Invoice Count IS :=>>> "+inCount);
                     InvoiceHeader invoice = guiFrame.getInvByNumber(invoiceNumber);
                     InvoiceIteams item = new InvoiceIteams(cName,inPrice,inCount,invoice);
+                      guiFrame.getIteamDetails().add(item);
                 }
+              guiFrame.setLTblModel(new ItemsTableModel(guiFrame.getIteamDetails()));
             }
             catch (IOException excption)
             {

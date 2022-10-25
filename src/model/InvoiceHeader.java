@@ -19,7 +19,7 @@ public class InvoiceHeader
     private int number;
     private String name;
     private Date dt; 
-    private ArrayList<InvoiceIteams> items;
+    private ArrayList<InvoiceIteams> items; // to get all lines
     
     public InvoiceHeader(int num, String name, Date dt) {
         this.number = num;
@@ -27,6 +27,30 @@ public class InvoiceHeader
         this.dt = dt;
     }
 
+     public int getInvoiceTotal() 
+    {
+        System.out.println("Invoice Header Number IS :=>>> "+number);
+        System.out.println("Invoice Header Number IS :=>>> "+name);
+        
+        return getItems().stream().mapToInt(item -> item.getInvoiceTotal()).sum();
+    }
+       public int getInvoiceTota2()
+    {
+        int total = 0;
+        for (InvoiceIteams item : getItems())
+        {
+            total += item.getInvoiceTotal();
+        }
+        return total;
+    }
+     public ArrayList<InvoiceIteams> getItems()
+    {
+        if (items == null) 
+        {
+            items = new ArrayList<>();
+        }
+        return items;
+    }
     public Date getDate() {
         return dt;
     }
@@ -51,34 +75,11 @@ public class InvoiceHeader
         this.name = name;
     }
     
-    public ArrayList<InvoiceIteams> getItems()
-    {
-        if (items == null) 
-        {
-            items = new ArrayList<>();
-        }
-        return items;
-    }
+    
     
      @Override
     public String toString() 
     {
         return "InvoiceHeader{" + "num=" + number + ", name=" + name + ", date=" + dt + '}';
-    }
-    
-    
-    public int getInvoiceTotal() 
-    {
-        return getItems().stream().mapToInt(item -> item.getInvoiceTotal()).sum();
-    }
-    
-    public int getInvoiceTota2()
-    {
-        int total = 0;
-        for (InvoiceIteams item : getItems())
-        {
-            total += item.getInvoiceTotal();
-        }
-        return total;
     }
 }

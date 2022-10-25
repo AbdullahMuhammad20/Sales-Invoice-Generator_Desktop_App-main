@@ -6,6 +6,7 @@
 package model;
 
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.AbstractTableModel;
 
 /**
@@ -22,13 +23,16 @@ public class HeaderTableModel extends AbstractTableModel
 
     public HeaderTableModel(ArrayList<InvoiceHeader> invoiceDetails)
     {
-        this.invoices = invoices;
+        this.invoices = invoiceDetails;
     }
 
     @Override
     public int getRowCount() 
-    {
-          return invoices.size();
+    {  int result = 0;
+           result = invoices.size();
+        
+        //System.out.println("getRowCount IS :=>>> "+result);
+          return result;
     }
 
     @Override

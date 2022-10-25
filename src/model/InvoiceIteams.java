@@ -10,12 +10,13 @@ package model;
  * @author Abdullah Younis
  *  @date  24/10/2022
  */
-public class InvoiceIteams {
+public class InvoiceIteams 
+{
     
      private String       invName;
-    private int           invPrice;
-    private int           invCount;
-    private InvoiceHeader invInvoiceHead;
+    private  int           invPrice;
+    private  int           invCount;
+    private  InvoiceHeader invInvoiceHead;
 
     // Constractor to inshilaize all elements 
      public InvoiceIteams(String name, int price, int count, InvoiceHeader invoice) 
