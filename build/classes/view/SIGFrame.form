@@ -217,20 +217,26 @@
       <SubComponents>
         <Component class="javax.swing.JButton" name="btnNewLine">
           <Properties>
-            <Property name="text" type="java.lang.String" value="New Line"/>
+            <Property name="text" type="java.lang.String" value="Create Item"/>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[85, 23]"/>
             </Property>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="btnNewLine.addActionListener(listener);"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JButton" name="btnDeleteName">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Delete Line"/>
+            <Property name="text" type="java.lang.String" value="Delete Item"/>
             <Property name="name" type="java.lang.String" value="" noResource="true"/>
           </Properties>
           <AccessibilityProperties>
             <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="btnDeleteLine"/>
           </AccessibilityProperties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="btnDeleteName.addActionListener(listener);"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JButton" name="btnNewInvoice">
           <Properties>
@@ -239,6 +245,9 @@
               <Dimension value="[85, 23]"/>
             </Property>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="btnNewInvoice.addActionListener(listener);"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JButton" name="btnDeleteInvoice">
           <Properties>
@@ -247,6 +256,9 @@
               <Dimension value="[85, 23]"/>
             </Property>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="btnDeleteInvoice.addActionListener(listener);"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>

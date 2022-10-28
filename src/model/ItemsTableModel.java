@@ -55,4 +55,9 @@ public class ItemsTableModel extends AbstractTableModel
         this.items = items;
     }
     
+    public ArrayList<InvoiceIteams> getItems() 
+    {
+        return items;
+    }
+    
 }

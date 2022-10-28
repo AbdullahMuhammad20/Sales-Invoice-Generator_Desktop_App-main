@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import model.InvoiceHeader;
 import model.InvoiceIteams;
 import controller.SIGController;
+import javax.swing.JLabel;
+import javax.swing.JTable;
 import javax.swing.table.TableModel;
 import model.HeaderTableModel;
 import model.ItemsTableModel;
@@ -42,9 +44,13 @@ public class SIGFrame extends javax.swing.JFrame {
         tblInv = new javax.swing.JTable();
         panel1 = new java.awt.Panel();
         btnNewLine = new javax.swing.JButton();
+        btnNewLine.addActionListener(listener);
         btnDeleteName = new javax.swing.JButton();
+        btnDeleteName.addActionListener(listener);
         btnNewInvoice = new javax.swing.JButton();
+        btnNewInvoice.addActionListener(listener);
         btnDeleteInvoice = new javax.swing.JButton();
+        btnDeleteInvoice.addActionListener(listener);
         jScrollPane2 = new javax.swing.JScrollPane();
         tblLines = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
@@ -81,10 +87,10 @@ public class SIGFrame extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tblInv);
 
-        btnNewLine.setText("New Line");
+        btnNewLine.setText("Create Item");
         btnNewLine.setPreferredSize(new java.awt.Dimension(85, 23));
 
-        btnDeleteName.setText("Delete Line");
+        btnDeleteName.setText("Delete Item");
         btnDeleteName.setName(""); // NOI18N
 
         btnNewInvoice.setText("New Invoice");
@@ -318,8 +324,18 @@ public class SIGFrame extends javax.swing.JFrame {
             AllInvoices = new ArrayList<>();
         return AllInvoices;
     }
-    
-     public ArrayList<InvoiceIteams> getIteamDetails()
+            
+    public HeaderTableModel getInvoicesTableModelDetails()
+     {
+        if (hTblModels == null)
+        {
+            hTblModels = new HeaderTableModel(getInvoiceDetails());
+        }
+        return hTblModels;
+    }
+     
+     
+    public ArrayList<InvoiceIteams> getIteamDetails()
     {
         if(AllInvoicesItems == null)
             AllInvoicesItems = new ArrayList<>();
@@ -327,7 +343,7 @@ public class SIGFrame extends javax.swing.JFrame {
     }
      
     
-     public void setInvoiceDetails(ArrayList<InvoiceHeader> invoices) 
+    public void setInvoiceDetails(ArrayList<InvoiceHeader> invoices) 
      {
         this.AllInvoices = invoices;
      }
@@ -357,7 +373,7 @@ public class SIGFrame extends javax.swing.JFrame {
         return invoice;
     }
     
-     public InvoiceHeader getInvByNumber2(int iNumber)
+    public InvoiceHeader getInvByNumber2(int iNumber)
      {
         for (InvoiceHeader item : getInvoiceDetails()) 
         {
@@ -369,7 +385,7 @@ public class SIGFrame extends javax.swing.JFrame {
         return null;
      }
      
-     public SIGController getController()
+    public SIGController getController()
      {
          return listener;
      }
@@ -388,5 +404,20 @@ public class SIGFrame extends javax.swing.JFrame {
         this.iTblModels = itemsTableModel;
         this.tblLines.setModel(itemsTableModel);
      }
+     
+     
+    public JTable getInvoiceTableDetails() 
+    {
+        return tblInv;
+    }
+    
+    
+    public JTable getItemTableDetails() 
+    {
+        return tblLines;
+    }
+    
+  
+            
 
 }

@@ -23,6 +23,8 @@ import view.SIGFrame;
 import model.HeaderTableModel;
 import model.InvoiceIteams;
 import model.ItemsTableModel;
+import view.Invoice_complex;
+import view.Items_complex;
 /**
  *
  * @author Abdullah Younis 
@@ -33,8 +35,8 @@ public class SIGController implements ActionListener
 {
     // Deculare a global varibale from GUI Form
        private SIGFrame guiFrame;
-       
-       
+       private Invoice_complex invoice_complex;
+       private Items_complex items_complex;
        // Create constractor
        public SIGController(SIGFrame guiframe) 
        {
@@ -55,44 +57,20 @@ public class SIGController implements ActionListener
                 case "Delete Invoice":
                     deleteInvoice();
                     break;
-                case "New Line":
-                    newLine();
+                case "New Item":
+                    newItem();
                     break;
-                case "Delete Line":
-                    deleteLine();
+                case "Delete Item":
+                    deleteItem();
                     break;
                 case "Load":
                     load(null,null);
                     break;
-                case "Save":
-                    save();
-                     break;
             }
         
         }
 
-
-    private void newInvoice()
-    {
-    
-    }
-    
-    private void deleteInvoice()
-    {
-    
-    }
-    
-    private void newLine()
-    {
-     
-    }
-    
-    private void deleteLine()
-    {
-    
-    }
-    
-    private void load(String hPath,String lPath)
+  private void load(String hPath,String lPath)
     {
         System.err.println("File will be loaded");
         
@@ -204,11 +182,39 @@ public class SIGController implements ActionListener
        return lines ; 
     }
     
-    private void save(){
-        
+    private void newInvoice()
+    {
+        invoice_complex = new Invoice_complex(guiFrame);
+        invoice_complex.setVisible(true);
     }
-
     
+    private void deleteInvoice()
+    {
+        int selectedRow = guiFrame.getInvoiceTableDetails().getSelectedRow();
+        if (selectedRow != -1) {
+            guiFrame.getInvoiceDetails().remove(selectedRow);
+            guiFrame.getInvoicesTableModelDetails().fireTableDataChanged();
+        }
+    }
+    
+    private void newItem()
+    {
+        items_complex = new Items_complex(guiFrame);
+        items_complex.setVisible(true);
+    }
+    
+    private void deleteItem()
+    {
+        int selectedRow = guiFrame.getItemTableDetails().getSelectedRow();
+
+        if (selectedRow != -1) 
+        {
+            ItemsTableModel linesTableModel = (ItemsTableModel) guiFrame.getItemTableDetails().getModel();
+            linesTableModel.getItems().remove(selectedRow);
+            linesTableModel.fireTableDataChanged();
+            guiFrame.getInvoicesTableModelDetails().fireTableDataChanged();
+        }
+    }
     
 }
 
