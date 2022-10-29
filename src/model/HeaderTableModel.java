@@ -51,7 +51,7 @@ public class HeaderTableModel extends AbstractTableModel
             case 1: 
                 return inv.getName();
             case 2:
-                return view.SIGFrame.dateFormat.format(inv.getDate());
+                return inv.getDate();
             case 3:
                 return inv.getInvoiceTota2();
             default:

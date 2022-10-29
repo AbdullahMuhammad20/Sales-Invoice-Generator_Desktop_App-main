@@ -27,7 +27,7 @@ public class InvoiceIteams
         this.invInvoiceHead = invoice;
         invoice.getItems().add(this);
     }
-     
+    
      
     public int getInvoiceTotal() 
     {
@@ -44,7 +44,7 @@ public class InvoiceIteams
         this.invName = name;
     }
 
-    public int getInvoicePrice()
+    public double getInvoicePrice()
     {
         return invPrice;
     }
@@ -72,6 +72,12 @@ public class InvoiceIteams
     public void setInvoice(InvoiceHeader invoice) 
     {
         this.invInvoiceHead = invoice;
+    }
+    
+    
+    public String getAsCSVEdited()
+    {
+        return invInvoiceHead.getNumber()+ "," + invName + "," + invPrice + "," + invCount;
     }
 
     @Override

@@ -42,6 +42,7 @@ public class SIGFrame extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblInv = new javax.swing.JTable();
+        tblInv.getSelectionModel().addListSelectionListener(listener);  tblInv.setModel(getInvoicesTableModelDetails());
         panel1 = new java.awt.Panel();
         btnNewLine = new javax.swing.JButton();
         btnNewLine.addActionListener(listener);
@@ -418,6 +419,36 @@ public class SIGFrame extends javax.swing.JFrame {
     }
     
   
-            
+    public JLabel getCustomerNameLbl()
+    {
+        return lblCustName ;
+    }
+
+    public JLabel getInvoiceDtLbl() 
+    {
+        return lblInvDt;
+    }
+
+    public JLabel getInvoiceNumLbl() 
+    {
+        return lblInvName;
+    }
+
+    public JLabel getInvoiceTotalLbl() 
+    {
+        return lblTotalAmt;
+    }
+    
+     public int getNextInvoiceNumber() 
+     {
+        int number = 0;
+        
+        for (InvoiceHeader invoice : getInvoiceDetails()) {
+            if (invoice.getNumber()> number) 
+                number = invoice.getNumber();
+        }
+        
+        return ++number;
+    }
 
 }

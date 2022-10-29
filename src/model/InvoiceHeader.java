@@ -18,23 +18,23 @@ public class InvoiceHeader
 {
     private int number;
     private String name;
-    private Date dt; 
+    private String dt; 
     private ArrayList<InvoiceIteams> items; // to get all lines
     
-    public InvoiceHeader(int num, String name, Date dt) {
+    public InvoiceHeader(int num, String name, String dt) {
         this.number = num;
         this.name = name;
         this.dt = dt;
     }
 
-     public int getInvoiceTotal() 
+     public double getInvoiceTotal() 
     {
         System.out.println("Invoice Header Number IS :=>>> "+number);
         System.out.println("Invoice Header Number IS :=>>> "+name);
         
-        return getItems().stream().mapToInt(item -> item.getInvoiceTotal()).sum();
+        return getItems().stream().mapToDouble(item -> item.getInvoiceTotal()).sum();
     }
-       public int getInvoiceTota2()
+       public double getInvoiceTota2()
     {
         int total = 0;
         for (InvoiceIteams item : getItems())
@@ -51,11 +51,11 @@ public class InvoiceHeader
         }
         return items;
     }
-    public Date getDate() {
+    public String getDate() {
         return dt;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.dt = date;
     }
 
@@ -75,7 +75,10 @@ public class InvoiceHeader
         this.name = name;
     }
     
-    
+    public String getAsCSVEdited() 
+    {
+        return number + "," + dt + "," + name;
+    }
     
      @Override
     public String toString() 

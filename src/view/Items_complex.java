@@ -43,8 +43,8 @@ public class Items_complex extends JDialog
         doneBtn = new JButton("OK");
         rollbackBtn = new JButton("Cancel");
         
-        doneBtn.setActionCommand("createLineOK");
-        rollbackBtn.setActionCommand("createLineCancel");
+        doneBtn.setActionCommand("createItemDone");
+        rollbackBtn.setActionCommand("createItemRollback");
         
         doneBtn.addActionListener(sIGFrame.getController());
         rollbackBtn.addActionListener(sIGFrame.getController());

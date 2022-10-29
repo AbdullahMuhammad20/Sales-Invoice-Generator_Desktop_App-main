@@ -176,6 +176,9 @@
               </Table>
             </Property>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="tblInv.getSelectionModel().addListSelectionListener(listener);  tblInv.setModel(getInvoicesTableModelDetails());  "/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>
